@@ -1,0 +1,99 @@
+/* БАЗОВЫЕ НАСТРОЙКИ И ТЕМЫ */
+:root {
+    --primary: #6366f1;
+    --gold: #fbbf24;
+    --gold-gradient: linear-gradient(135deg, #bf953f 0%, #fcf6ba 45%, #b38728 70%, #aa771c 100%);
+    --bg-dark: #020617;
+    --text-main: #ffffff;
+    --glass: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="light"] {
+    --bg-dark: #f8fafc;
+    --text-main: #0f172a; /* Темные буквы для светлой темы */
+    --glass: rgba(0, 0, 0, 0.05);
+    --glass-border: rgba(0, 0, 0, 0.1);
+    --gold-gradient: linear-gradient(135deg, #5d4037 0%, #8a6d3b 45%, #5d4037 70%, #3e2723 100%);
+    --gold: #8a6d3b;
+}
+
+/* ФИКС ГОРИЗОНТАЛЬНОЙ ЛИНИИ (СКРОЛЛА) */
+html, body {
+    max-width: 100%;
+    overflow-x: hidden; /* Линия прокрутки полностью удалена */
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    position: relative;
+}
+
+body {
+    background-color: var(--bg-dark);
+    font-family: 'Montserrat', sans-serif;
+    color: var(--text-main);
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* ФИКС ПОИСКОВИКА (ВИДИМОСТЬ БУКВ В ТЕМНОЙ ТЕМЕ) */
+#mainSearch {
+    color: var(--text-main) !important;
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+}
+
+#mainSearch::placeholder {
+    color: var(--text-main);
+    opacity: 0.5;
+}
+
+/* ЦЕНТРОВКА ТЕКСТА НА КНОПКАХ */
+button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero-title {
+    font-family: 'Playfair Display', serif;
+    background: var(--gold-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.glass-panel {
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+}
+
+/* ДЕКОРАТИВНЫЕ СФЕРЫ (ФИКС, ЧТОБЫ НЕ СОЗДАВАЛИ СКРОЛЛ) */
+.blob {
+    position: fixed;
+    width: 40vw;
+    height: 40vw;
+    background: radial-gradient(circle, rgba(99,102,241,0.15) 0%, transparent 70%);
+    z-index: -1;
+    filter: blur(80px);
+    pointer-events: none;
+    max-width: 600px;
+}
+
+#blob-1 { top: -100px; right: -100px; }
+#blob-2 { bottom: -100px; left: -100px; }
+
+/* КНОПКА ЗАКЛАДКИ */
+.watchlist-btn {
+    position: absolute; top: 24px; right: 24px; width: 52px; height: 52px;
+    border-radius: 18px; z-index: 30; background: rgba(0, 0, 0, 0.4); 
+    backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); 
+    color: white; transition: 0.3s;
+}
+.watchlist-btn.active { background: var(--gold-gradient); border: none; color: white; }
+
+/* ИНТЕРАКТИВНЫЕ ЗВЕЗДЫ */
+.star-rating { display: flex; flex-direction: row-reverse; gap: 4px; }
+.star-rating input { display: none; }
+.star-rating label { font-size: 2rem; color: rgba(128,128,128,0.3); cursor: pointer; transition: 0.2s; }
+.star-rating label:hover, .star-rating label:hover ~ label, .star-rating input:checked ~ label { color: var(--gold); }
